@@ -77,12 +77,17 @@ jobs:
             .registeredBy
           )' > task-definition.json
 
+          # Automatically extract the actual container name from the task definition
+          ACTUAL_CONTAINER_NAME=$(jq -r '.containerDefinitions[0].name' task-definition.json)
+          echo "Detected container name: $ACTUAL_CONTAINER_NAME"
+          echo "container_name=$ACTUAL_CONTAINER_NAME" >> $GITHUB_OUTPUT
+
       - name: Render New Image in Task Definition
         id: render-task-def
         uses: aws-actions/amazon-ecs-render-task-definition@v1
         with:
           task-definition: task-definition.json
-          container-name: ${{ env.CONTAINER_NAME }}
+          container-name: ${{ steps.get-task-def.outputs.container_name }}
           image: ${{ steps.build-image.outputs.image }}
 
       - name: Deploy to Amazon ECS Service
