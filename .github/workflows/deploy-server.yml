@@ -15,7 +15,7 @@ permissions:
 env:
   AWS_REGION: ${{ vars.AWS_REGION || 'ap-southeast-2' }}
   ECR_REPOSITORY: ${{ vars.ECR_REPOSITORY || 'vantigo-server' }}
-  ECS_CLUSTER: ${{ vars.ECS_CLUSTER || 'vantigo-service-cluster' }}
+  ECS_CLUSTER: ${{ vars.ECS_CLUSTER || 'vantigo-server-cluster' }}
   ECS_SERVICE: ${{ vars.ECS_SERVICE || 'vantigo-server-service' }}
   ECS_TASK_DEFINITION: ${{ vars.ECS_TASK_DEFINITION || 'vantigo-server-task' }}
   CONTAINER_NAME: ${{ vars.CONTAINER_NAME || 'vantigo-server' }}
